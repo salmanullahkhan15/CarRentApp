@@ -1,0 +1,70 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Dashboard</strong>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="common-bg">
+
+  <div padding *ngIf="!searchHide">
+    <div padding>
+    <ion-card no-margin margin-bottom class="common-bg full-width">
+      <ion-item class="uppercase mt-half green-bg home-list text-1x text-center bold no-marginT" (click)="goToBookings()">
+        <ion-icon name="list" class="text-2x text-white"></ion-icon>
+        <div class="padding-xs text-white">Bookings</div>
+      </ion-item>
+
+      <ion-item class="uppercase mt-half purple-bg  home-list text-1x text-center bold" (click)="goToVehicles()">
+        <ion-icon name="car" class="text-white text-2x"></ion-icon>
+        <div class="padding-xs text-white">Registered Vehicles</div>
+      </ion-item>
+
+      <ion-item class="uppercase mt-half dark-bg home-list text-1x text-center bold" (click)="addNew()">
+        <ion-icon name="add" class="text-2x text-white"></ion-icon>
+        <div class="padding-xs text-white">Add Vehicle</div>
+      </ion-item>
+
+      <ion-item class="uppercase mt-half yellow-bg home-list text-1x text-center bold" (click)="goToNoti()">
+        <ion-icon name="notifications" class="text-2x text-white"></ion-icon>
+        <div class="padding-xs text-white">Notifications</div>
+      </ion-item>
+    </ion-card>
+    </div>
+  </div>
+
+  <ion-fab top right edge>
+    <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="addNew()"><ion-icon name="car"></ion-icon></button>
+      <button ion-fab (click)="goToNoti()"><ion-icon name="notifications"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-item-divider *ngIf="searchHide" color="dark" class="bold">Registered Vehicles ({{ count }})</ion-item-divider>
+
+  <div padding [hidden]="!searchHide">
+    <ion-card *ngFor="let list of lists">
+      <img [src]="list.image"/>
+      <ion-card-content>
+        <ion-card-title class="text-1x bold">{{ list.name }}  ({{ list.type }}) </ion-card-title>
+        <p>
+          {{ list.model }} • {{ list.make }}<br>
+          City Charges: {{ list.city_price }}Rs. / Day<br>
+          Outer City Charges: {{ list.other_price }}Rs. / Day
+        </p>
+        <p class="text-center">
+          <button ion-button color="primary" (click)="goToEdit(list._id)"><ion-icon name="create" class=""></ion-icon></button>
+          <button ion-button color="danger" (click)="deleteVehicle(list._id)"><ion-icon name="trash" class=""></ion-icon></button>
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

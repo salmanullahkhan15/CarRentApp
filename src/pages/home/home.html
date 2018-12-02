@@ -1,0 +1,60 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Car</strong> Rent
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)" class="text-1-5x">
+        <ion-badge color="danger" *ngIf="notificationCount">{{ notificationCount }}</ion-badge>
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()" class="text-1-5x">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="animated fadeIn " padding>
+
+  <ion-card  no-margin margin-bottom class="white-bg full-width" [hidden]="searchHide">
+    <ion-item class="uppercase mt-half purple-bg  home-list text-1x text-center bold" (click)="bookNow()">
+        <ion-icon name="car" class="text-white text-2x"></ion-icon>
+        <div class="padding-xs text-white">Book Now</div>
+    </ion-item>
+
+    <ion-item class="uppercase mt-half green-bg home-list text-1x text-center bold" (click)="goToBookings()">
+      <ion-icon name="list" class="text-2x text-white"></ion-icon>
+      <div class="padding-xs text-white">Your Bookings</div>
+    </ion-item>
+  </ion-card>
+
+  <ion-card padding no-margin margin-bottom class="full-width" [hidden]="!searchHide">
+    <ion-item>
+      <ion-label>Vehicle Type</ion-label>
+      <ion-select [(ngModel)]="search.type" interface="popover">
+        <ion-option *ngFor="let type of Types" [value]="type.name">{{ type.des }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item tappable (click)="choosePlace('from')" class="border-bottom">
+      <ion-icon name="pin" color="primary" item-left></ion-icon>
+      <span>{{ search.fromName }}</span>
+    </ion-item>
+    <ion-item tappable (click)="choosePlace('to')" class="border-bottom">
+      <ion-icon name="navigate" color="primary" item-left></ion-icon>
+      <span>{{ search.toName }}</span>
+    </ion-item>
+  </ion-card>
+
+  <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()" [hidden]="!searchHide">
+    <ion-icon name="search"></ion-icon> Search
+  </button>
+
+  <div #map id="map" [hidden]="!searchHide"></div>
+
+</ion-content>

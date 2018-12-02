@@ -1,0 +1,8 @@
+{
+  "name": "car-rent",
+  "app_id": "7f739cda",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

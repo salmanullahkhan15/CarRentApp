@@ -1,0 +1,51 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      <span ion-text>Available Vehicles</span>
+    </ion-title>
+  </ion-navbar>
+
+  <!--  -->
+  <ion-toolbar padding color="light">
+    <p ion-text no-margin class="text-white">
+      <strong>{{ count }}</strong> result(s) found!
+    </p>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding class="trips detail-bg">
+
+  <ion-card class="secondary-bg" *ngIf="!count">
+    <ion-card-content class="text-white">
+      <ion-icon name="warning"></ion-icon>
+      We are sorry. No vehicle(s) are available at the moment. Please try again
+    </ion-card-content>
+  </ion-card>
+
+  <!--list of cars-->
+  <div class="trip card" *ngFor="let car of cars" tappable (click)="viewDetail(car._id)" margin-bottom>
+    <div class="background border-bottom" [ngStyle]="{'background-image': 'url(' + (car.image || '') + ')'}">
+      <div class="background-filter rlt">
+        <div class="align-bottom" padding-left padding-right>
+          <div class="pull-left">
+            <h6 class="text-white" ion-text>{{ car.name }} - {{ car.model }} • {{ car.make }}</h6>
+          </div>
+          <h6 class="pull-right text-white" ion-text>{{ car.by.company }}</h6>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <div class="padding-sm primary-bg">
+      <ion-icon name="person-add" class="text-white"></ion-icon>
+      <span ion-text class="text-white"><strong>Driver</strong>: {{ car.driver_price | currency:'PKR' }} / Day</span>
+      <div class="pull-right">
+        <span class="" ion-text color="light"><strong>Inner City</strong>: <span ion-text class="text-green bold">{{ car.city_price | currency:'PKR' }} / Day</span></span>
+        <br>
+        <span class="" ion-text color="light"><strong>Outer City</strong>: <span ion-text class="text-green bold">{{ car.other_price | currency:'PKR' }} / Day</span></span>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</ion-content>

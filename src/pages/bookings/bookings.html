@@ -1,0 +1,33 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Your Bookings</ion-title>
+  </ion-navbar>
+
+  <!--  -->
+  <ion-toolbar padding color="light">
+    <p ion-text no-margin class="text-white">
+      <strong>{{ count }}</strong> booking(s) found!
+    </p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bookings">
+  <ion-list>
+    <ion-item *ngFor="let book of bookings">
+      <ion-thumbnail item-start>
+        <img [src]="book.car.image || ''" alt="image">
+      </ion-thumbnail>
+      <h2>{{ book.car.name }} - {{ book.car.type }}</h2>
+      <p>{{ book.car.model }} • {{ book.car.make }}</p>
+      <p><strong>{{ book.total-book.discount | currency:'PKR' }}</strong></p>
+      <button ion-button item-end color="dark" (click)="viewDetail(book._id)">View</button>
+      <button *ngIf="book.status != 1" ion-button item-end icon-only clear color="danger" (click)="deleteBooking(book._id)"><ion-icon name="trash"></ion-icon></button>
+      <p>{{ getPlace(book.from) }} to {{ getPlace(book.to) }}</p>
+      <button round ion-button icon-right outline [color]="status[book.status].color"><span class="text-sm">{{ status[book.status].name }}</span> <ion-icon name="{{ status[book.status].icon }}"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+</ion-content>

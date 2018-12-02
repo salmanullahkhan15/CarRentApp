@@ -1,0 +1,81 @@
+<!-- -->
+<ion-header class="no-shadow">
+
+  <ion-navbar class="no-border">
+    <ion-title>
+      <ion-icon name="cog" class="text-primary"></ion-icon>
+      <span class="text-primary">Settings</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="common-bg">
+  <!-- User settings-->
+  <ion-item-group>
+    <ion-item-divider color="secondary" class="bold">User Settings</ion-item-divider>
+    <form padding class="list-form" [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <ion-item [ngClass]="{'error-border':!authForm.controls.name.valid && authForm.controls.name.touched}">
+        <ion-label floating>
+          <ion-icon name="person" item-start class="text-primary"></ion-icon>
+          Full Name
+        </ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="loginUser.role == 'owner'" [ngClass]="{'error-border':!authForm.controls.company.valid && authForm.controls.company.touched}">
+        <ion-label floating>
+          <ion-icon name="car" item-start class="text-primary"></ion-icon>
+          Company Name
+        </ion-label>
+        <ion-input type="text" formControlName="company"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="loginUser.role == 'owner'" [ngClass]="{'error-border':!authForm.controls.city.valid && authForm.controls.city.touched}">
+        <ion-label floating>
+          <ion-icon name="pin" item-start class="text-primary"></ion-icon>
+          City
+        </ion-label>
+        <ion-select formControlName="city" cancelText="Cancel" okText="OK">
+          <ion-option *ngFor="let place of places" [value]="place.name">{{ place.name }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="loginUser.role == 'owner'" [ngClass]="{'error-border':!authForm.controls.address.valid && authForm.controls.address.touched}">
+        <ion-label floating>
+          <ion-icon name="locate" item-start class="text-primary"></ion-icon>
+          Full Address
+        </ion-label>
+        <ion-textarea formControlName="address"></ion-textarea>
+      </ion-item>
+
+      <ion-item *ngIf="loginUser.role == 'owner'" [ngClass]="{'error-border':!authForm.controls.phone.valid && authForm.controls.phone.touched}">
+        <ion-label floating>
+          <ion-icon name="call" item-start class="text-primary"></ion-icon>
+          Phone No
+        </ion-label>
+        <ion-input type="number" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.email.valid && authForm.controls.email.touched}">
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          Email
+        </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Notifications?</ion-label>
+        <ion-toggle checked="true"></ion-toggle>
+      </ion-item>
+
+      <div margin-top>
+        <button ion-button block color="dark" tappable [disabled]="!authForm.valid" type="submit">
+          Update
+        </button>
+        <ion-input type="hidden" name="_id" formControlName="_id"></ion-input>
+      </div>
+    </form>
+  </ion-item-group>
+</ion-content>

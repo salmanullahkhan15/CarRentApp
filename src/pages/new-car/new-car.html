@@ -1,0 +1,97 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      <ion-icon name="car" class="text-white"></ion-icon>
+      <span class="text-white">{{ headerText }} Vehicle</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="">
+
+  <div padding class="common-bg">
+    <div>
+      <form [formGroup]="carForm" (ngSubmit)="onSubmit(carForm.value)">
+        <!-- Car info-->
+        <ion-item-group>
+          <ion-item-divider color="secondary" class="bold">Information</ion-item-divider>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.name.valid && carForm.controls.name.touched}">
+            <ion-label floating>Car Name</ion-label>
+            <ion-input type="text" name="name" formControlName="name"></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.type.valid && carForm.controls.type.touched}">
+            <ion-label>Type</ion-label>
+            <ion-select formControlName="type" cancelText="Cancel" okText="OK">
+              <ion-option *ngFor="let type of Types" [value]="type.name">{{ type.des }}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.model.valid && carForm.controls.model.touched}">
+            <ion-label floating>Model</ion-label>
+            <ion-input type="text" name="model" formControlName="model"></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.make.valid && carForm.controls.make.touched}">
+            <ion-label floating>Make (year)</ion-label>
+            <ion-input type="number" name="make" formControlName="make"></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.plate.valid && carForm.controls.plate.touched}">
+            <ion-label floating>Plate#</ion-label>
+            <ion-input type="text" name="plate" formControlName="plate"></ion-input>
+          </ion-item>
+
+          <div>
+            <div padding class="form-bottom">
+              <button type="button" icon-left ion-button class="pull-right" color="secondary" tappable (click)="presentActionSheet()">
+                <ion-icon name="images"></ion-icon> Select Image
+              </button>
+              <div class="clear"></div>
+            </div>
+          </div>
+
+          <div *ngIf="lastImage">
+            <img [src]="lastImage" style="width: 100%">
+          </div>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.description.valid && carForm.controls.description.touched}">
+            <ion-label floating>Other Information</ion-label>
+            <ion-textarea  name="description" formControlName="description"></ion-textarea>
+          </ion-item>
+
+        </ion-item-group>
+        <!-- booking settings-->
+        <ion-item-group class="marginB-2">
+          <ion-item-divider color="secondary" class="bold">Price Information</ion-item-divider>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.city_price.valid && carForm.controls.city_price.touched}">
+            <ion-label floating>Inner City Price (PKR) / Day</ion-label>
+            <ion-input type="number" name="city_price" formControlName="city_price"></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.other_price.valid && carForm.controls.other_price.touched}">
+            <ion-label floating>Other City (PKR) / Day</ion-label>
+            <ion-input type="number" name="other_price" formControlName="other_price"></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'error-border':!carForm.controls.driver_price.valid && carForm.controls.driver_price.touched}">
+            <ion-label floating>Driver Charges (PKR) / Day</ion-label>
+            <ion-input type="number" name="driver_price" formControlName="driver_price"></ion-input>
+          </ion-item>
+
+        </ion-item-group>
+
+        <button ion-button icon-start block color="purple" tappable [disabled]="!carForm.valid" type="submit">
+          <ion-icon name="log-in"></ion-icon>
+          Submit
+        </button>
+        <ion-input type="hidden" name="_id" formControlName="_id"></ion-input>
+        <ion-input type="hidden" name="image" formControlName="image" [value]="lastImage"></ion-input>
+      </form>
+    </div>
+  </div>
+
+</ion-content>

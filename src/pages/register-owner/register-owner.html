@@ -1,0 +1,86 @@
+<!-- -->
+<ion-content padding class="auth-page animated fadeIn">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h2 ion-text class="text-primary">
+        <strong>Car</strong> Rent
+      </h2>
+    </div>
+    <div class="clear"></div>
+    <!-- Login form -->
+    <form class="list-form" [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <ion-item [ngClass]="{'error-border':!authForm.controls.name.valid && authForm.controls.name.touched}">
+        <ion-label floating>
+          <ion-icon name="person" item-start class="text-primary"></ion-icon>
+          Full Name
+        </ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.company.valid && authForm.controls.company.touched}">
+        <ion-label floating>
+          <ion-icon name="car" item-start class="text-primary"></ion-icon>
+          Company Name
+        </ion-label>
+        <ion-input type="text" formControlName="company"></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.city.valid && authForm.controls.city.touched}">
+        <ion-label floating>
+          <ion-icon name="pin" item-start class="text-primary"></ion-icon>
+          City
+        </ion-label>
+        <ion-select formControlName="city" cancelText="Cancel" okText="OK">
+          <ion-option *ngFor="let place of places" [value]="place.name">{{ place.name }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.address.valid && authForm.controls.address.touched}">
+        <ion-label floating>
+          <ion-icon name="locate" item-start class="text-primary"></ion-icon>
+          Full Address
+        </ion-label>
+        <ion-textarea formControlName="address"></ion-textarea>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.phone.valid && authForm.controls.phone.touched}">
+        <ion-label floating>
+          <ion-icon name="call" item-start class="text-primary"></ion-icon>
+          Phone No
+        </ion-label>
+        <ion-input type="number" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.email.valid && authForm.controls.email.touched}">
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          Email
+        </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Password
+        </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <div margin-top>
+        <button ion-button block color="dark" tappable [disabled]="!authForm.valid" type="submit">
+          SIGN UP
+        </button>
+      </div>
+    </form>
+
+    <!-- Other links -->
+    <div text-center margin-top class="marginB-2">
+      <span ion-text color="primary" tappable (click)="login()">I have an account</span>
+    </div>
+
+  </div>
+</ion-content>

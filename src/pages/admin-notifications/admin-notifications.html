@@ -1,0 +1,30 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="yellow">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <span ion-text><ion-icon name="notifications" class="text-white"></ion-icon> Notifications</span>
+    </ion-title>
+  </ion-navbar>
+
+  <!--  -->
+  <ion-toolbar padding color="light">
+    <p ion-text no-margin class="text-white">
+      <strong>{{ count }}</strong> Notifications!
+    </p>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="detail-bg">
+  <ion-list>
+
+    <button ion-item *ngFor="let list of notifications" (click)="itemSelected(list)">
+      <ion-icon [name]="list.status ? 'mail-open' : 'mail'" item-start></ion-icon>
+      {{ list.message }}
+    </button>
+
+  </ion-list>
+</ion-content>
