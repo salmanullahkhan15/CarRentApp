@@ -1,10 +1,10 @@
-import {Component} from "@angular/core";
-import {Events, NavController} from "ionic-angular";
-import {LoginPage} from "../login/login";
-import {HomePage} from "../home/home";
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthProvider} from "../../providers/auth/auth";
-import {UtilitService} from "../../services/utilit-service";
+import { Component } from "@angular/core";
+import { Events, NavController } from "ionic-angular";
+import { LoginPage } from "../login/login";
+import { HomePage } from "../home/home";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthProvider } from "../../providers/auth/auth";
+import { UtilitService } from "../../services/utilit-service";
 
 
 @Component({
@@ -16,15 +16,17 @@ export class RegisterPage {
   authForm: FormGroup;
 
   constructor(public nav: NavController,
-              public authService: AuthProvider,
-              public formBuilder: FormBuilder,
-              public events: Events,
-              public utilit: UtilitService) {
+    public authService: AuthProvider,
+    public formBuilder: FormBuilder,
+    public events: Events,
+    public utilit: UtilitService) {
 
     this.authForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern('^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$')])],
       name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      mobileNumber: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      idNumber: ['', Validators.compose([Validators.required, Validators.minLength(9)])],
     });
   }
 
@@ -40,6 +42,8 @@ export class RegisterPage {
         email: value.email,
         password: value.password,
         role: 'user',
+        mobileNumber: value.mobileNumber,
+        idNumber: value.idNumber
       };
       console.log(credentials);
 

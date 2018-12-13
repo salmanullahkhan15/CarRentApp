@@ -36,6 +36,52 @@
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
 
+
+      <!-- sabih work -->
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Confirm Password
+        </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.mobileNumber.valid && authForm.controls.mobileNumber.touched}">
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Mobile Number
+        </ion-label>
+        <ion-input type="tel" formControlName="mobileNumber"></ion-input>
+      </ion-item>
+
+      
+      <ion-item [ngClass]="{'error-border':!authForm.controls.idNumber.valid && authForm.controls.idNumber.touched}">
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Id Number
+        </ion-label>
+        <ion-input type="tel" formControlName="idNumber"></ion-input>
+      </ion-item>
+
+<!--
+      <ion-item [ngClass]="{'error-border':!authForm.controls.name.valid && authForm.controls.name.touched}">
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Username
+        </ion-label>
+        <ion-input type="tel" formControlName="name"></ion-input>
+      </ion-item>
+
+
+ -->
+
+
+
+
+
+
       <div margin-top>
         <button ion-button block color="dark" tappable [disabled]="!authForm.valid" type="submit">
           SIGN UP
